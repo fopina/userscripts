@@ -36,6 +36,8 @@ unsafeWindow.sendToTransmission = function(href) {
 		gmrequest.onload = function (resp) {
 				if (resp.status == 409) {
 					var reply = resp.responseHeaders.split('X-Transmission-Session-Id: ')[1].split('\n')[0];
+					// Uncomment the line below if you're using this in NinjaKit (patched to enable unsafeWindow - http://misuzi.me/files/NinjaKit.safariextz)
+					// reply = reply.substring(0, reply.length - 1);
 					GM_setValue('btsession', reply);
 					btsession = reply;
 					GM_log('Acquired token ' + reply);
@@ -46,15 +48,15 @@ unsafeWindow.sendToTransmission = function(href) {
 								alert('Failed to use CSFR token');
 							}
 							else {
-								var reply = eval('(' + resp.responseText + ')');
-								alert('Result: ' + reply.result);
+								var obj = eval('(' + resp2.responseText + ')');
+								alert('Result: ' + obj.result);
 							}
 						};
 					GM_xmlhttpRequest(gmrequest);
 				}
 				else {
-					var reply = eval('(' + resp.responseText + ')');
-					alert('Result: ' + reply.result);
+					var obj = eval('(' + resp.responseText + ')');
+					alert('Result: ' + obj.result);
 				}	
 			};
 		GM_xmlhttpRequest(gmrequest);
