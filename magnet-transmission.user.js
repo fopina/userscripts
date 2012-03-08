@@ -8,7 +8,7 @@
 
 unsafeWindow.sendToTransmission = function(href) {
 	setTimeout(function(){
-		var bthost = GM_getValue('bthost')
+		var bthost = GM_getValue('bthost');
 		/*
 			If you need to change the value of 'bthost', just go to about:config, filter 'bthost'
 			and either change it there or reset it (and the prompt will show up again)
@@ -17,22 +17,22 @@ unsafeWindow.sendToTransmission = function(href) {
 			bthost = prompt('Your Transmission RPC URL - including /transmission/rpc','');
 			GM_setValue('bthost', bthost);
 		}
-		var btsession = GM_getValue('btsession')
+		var btsession = GM_getValue('btsession');
 		var request = {
 			method: 'torrent-add',
 			arguments: {
-				filename: href,
-			},
-		}
+				filename: href
+			}
+		};
 		var gmrequest = {
 			method: 'POST',
 			url: bthost,
 			data: JSON.stringify(request),
-			headers: { 'X-Transmission-Session-Id': btsession, 'Content-Type': 'json; charset=UTF-8' },
-		}
+			headers: { 'X-Transmission-Session-Id': btsession, 'Content-Type': 'json; charset=UTF-8' }
+		};
 		gmrequest.onerror = function(resp) {
 			alert('Error connecting to your transmission host: ' + bthost);
-		}
+		};
 		gmrequest.onload = function (resp) {
 				if (resp.status == 409) {
 					var reply = resp.responseHeaders.split('X-Transmission-Session-Id: ')[1].split('\n')[0];
@@ -59,7 +59,7 @@ unsafeWindow.sendToTransmission = function(href) {
 			};
 		GM_xmlhttpRequest(gmrequest);
 	},0);
-}
+};
 
 function removeAds() {
 	//sorry PirateBay, it's ok to have ads but flash ads??
@@ -76,7 +76,7 @@ function replaceMagnetLinks() {
 	for (i = 0; i < links.length; i++) {
 		var link = links[i];
 		href = link.getAttribute('href');
-		if (href.indexOf('magnet:') == 0) {
+		if (href.indexOf('magnet:') === 0) {
 			var newlink = link.cloneNode(true);
 			newlink.setAttribute('href', 'javascript:sendToTransmission("' + href + '");');
 			var img = newlink.childNodes[0];
