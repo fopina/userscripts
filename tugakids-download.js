@@ -20,7 +20,7 @@ function waitForElement(selector, callback, maxtries = false, interval = 100) {
     }, interval)
 }
   
-unction doIt() {
+function doIt() {
     var videoSrc = document.querySelectorAll('video.video-js source')[0];
     var link = document.createElement("div");
     link.innerHTML = '<a href="' + videoSrc.getAttribute('src') + '">Download</a>';
