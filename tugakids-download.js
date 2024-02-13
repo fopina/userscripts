@@ -22,10 +22,11 @@ function waitForElement(selector, callback, maxtries = false, interval = 100) {
   
 function doIt() {
     var videoSrc = document.querySelectorAll('video.video-js source')[0];
-    var link = document.createElement("div");
-    link.innerHTML = '<a href="' + videoSrc.getAttribute('src') + '">Download</a>';
-    videoSrc.parentElement.insertAdjacentElement("afterend", link.firstChild);
+    var link = document.createElement("a");
+  	link.href = videoSrc.getAttribute('src');
+  	link.download = videoSrc.getAttribute('src');
+  	link.innerText = "Download";
+    videoSrc.parentElement.insertAdjacentElement("afterend", link);
 }
   
 waitForElement('video.video-js source', doIt);
- 
