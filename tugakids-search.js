@@ -11,8 +11,9 @@
 // This userscript also works with iOS UserScripts (https://github.com/quoid/userscripts)
 
 head = document.getElementsByTagName('head')[0];
-if (!head) { return; }
-var css = document.createElement("style");
-css.type = 'text/css';
-css.innerHTML = "@media only screen and (max-width: 888px) {.header .box_h .buscador {display:block;}}";
-head.appendChild(css);
+if (head) {
+    var css = document.createElement("style");
+    css.type = 'text/css';
+    css.innerHTML = "@media only screen and (max-width: 888px) {.header .box_h .buscador {display:block;}}";
+    head.appendChild(css);
+}
