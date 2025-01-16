@@ -57,6 +57,7 @@ function filterCompleted() {
     const currentDate = new Date();
     const twoWeeksAgo = new Date();
     twoWeeksAgo.setDate(currentDate.getDate() - 14)
+    var tasks = 0;
 
     cursorRequest.onsuccess = function (event) {
       const cursor = event.target.result;
@@ -64,10 +65,12 @@ function filterCompleted() {
         const cursorDate = new Date(cursor.value.last_modified_at.date_time + 'Z'); // FIXME: assuming always UTC - make use of timezone in the object
         if (cursorDate >= twoWeeksAgo && cursorDate <= currentDate) {
           console.log(`Task: ${cursor.value.title}\n${cursor.value.completed_at}\n${cursorDate}`);
+          tasks++;
         }
         cursor.continue();
       } else {
         console.log("No more tasks.");
+        alert(`${tasks} tasks listed in your console log`);
       }
     };
 
