@@ -3,6 +3,7 @@
 // @description  Filter tasks by last_modified date
 // @version      1.0
 // @match        https://to-do.office.com/tasks/all
+// @updateURL https://raw.githubusercontent.com/fopina/userscripts/main/todo-done.js
 // @grant        none
 // ==/UserScript==
 
